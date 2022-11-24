@@ -8,15 +8,15 @@ const Currencies = lazy(() => import("./pages/Currencies"));
 
 const App = () => {
   return (
-    <>
-      <Header />
+    <div className="isolate bg-black max-h-full">
+      <Header companyName="Eth-dapp" />
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/currencies" element={<Currencies />} />
         </Routes>
       </Suspense>
-    </>
+    </div>
   );
 };
 

@@ -1,10 +1,14 @@
 import React from "react";
-import Markets from "../components/Markets";
+import { useSearchParams } from "react-router-dom";
+import Markets from "../components/Currencies/Markets";
 
 const Currencies = () => {
+  const [searchParams, setSearchParams] = useSearchParams({ currency: "" });
+  const currency = searchParams.get("currency");
+
   return (
     <>
-      <Markets />
+      <Markets setSearchParams={setSearchParams} />
     </>
   );
 };
