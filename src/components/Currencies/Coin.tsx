@@ -1,17 +1,16 @@
 import React from "react";
 import { ICoinMarketsResponse } from "../../interfaces/coingecko";
-// import { currencyFormat } from "../utils/currencyFormat";
 
 interface ICoinProps {
   coin: ICoinMarketsResponse;
-  handleClick: (coin: ICoinMarketsResponse) => void;
+  popCryptoInfo: (coinName: string) => void;
 }
 
-const Coin = ({ coin, handleClick }: ICoinProps) => {
+const Coin = ({ coin, popCryptoInfo }: ICoinProps) => {
   return (
     <div
       className="grid grid-cols-2 sm:grid-cols-3 font-light p-2 rounded cursor-pointer border-gray-200 border mt-2 hover:bg-gray-700"
-      onClick={() => handleClick(coin)}>
+      onClick={() => popCryptoInfo((coin as ICoinMarketsResponse).id)}>
       <div className="flex items-center gap-1 w-full">
         <img className="w-10" src={coin.image} alt={coin.name} />
         <p>{coin.name}</p>

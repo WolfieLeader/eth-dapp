@@ -1,22 +1,15 @@
-import React, { useCallback } from "react";
+import React from "react";
 import useAxios from "../../hooks/useAxios";
 import Coin from "./Coin";
 import { ICoinMarketsResponse } from "../../interfaces/coingecko";
 
-interface IMarketsProps {
-  setSearchParams: (searchParams: URLSearchParams) => void;
+interface ICoinListProps {
+  popCryptoInfo: (coinName: string) => void;
 }
 
-const Markets = ({ setSearchParams }: IMarketsProps) => {
+const CoinList = ({ popCryptoInfo }: ICoinListProps) => {
   const { response } = useAxios(
     "coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false"
-  );
-
-  const handleClick = useCallback(
-    (coin: ICoinMarketsResponse) => {
-      setSearchParams(new URLSearchParams({ currency: coin.id }));
-    },
-    [setSearchParams]
   );
 
   return (
@@ -24,10 +17,10 @@ const Markets = ({ setSearchParams }: IMarketsProps) => {
       <h1 className="text-3xl my-4">Cryptocurrencies:</h1>
       {response &&
         (response as ICoinMarketsResponse[]).map((coin) => (
-          <Coin key={coin.id} coin={coin} handleClick={handleClick} />
+          <Coin key={coin.id} coin={coin} popCryptoInfo={popCryptoInfo} />
         ))}
     </section>
   );
 };
 
-export default Markets;
+export default CoinList;

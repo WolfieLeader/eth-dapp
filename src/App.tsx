@@ -1,7 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-
-import Header from "./components/Header";
+import Header from "./components/Header/Header";
 
 const Home = lazy(() => import("./pages/Home"));
 const Currencies = lazy(() => import("./pages/Currencies"));
