@@ -13,13 +13,15 @@ const CoinList = ({ popCryptoInfo }: ICoinListProps) => {
   );
 
   return (
-    <section>
-      <h1 className="text-3xl my-4">Cryptocurrencies:</h1>
-      {response &&
-        (response as ICoinMarketsResponse[]).map((coin) => (
-          <Coin key={coin.id} coin={coin} popCryptoInfo={popCryptoInfo} />
-        ))}
-    </section>
+    <div>
+      <div className="text-white text-lg font-semibold tracking-tight sm:text-3xl mt-4">Sorted By Market Cap:</div>
+      <section>
+        {response &&
+          (response as ICoinMarketsResponse[]).map((coin) => (
+            <Coin key={coin.id} coin={coin} popCryptoInfo={popCryptoInfo} />
+          ))}
+      </section>
+    </div>
   );
 };
 

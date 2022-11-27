@@ -12,14 +12,14 @@ const Tab = ({ title, href, current }: ITabProps) => {
       {current ? (
         <a
           href={href}
-          className="block py-2 pl-3 pr-4 bg-blue-600 rounded md:bg-transparent md:text-blue-600 md:p-0 text-white"
+          className="font-bold text-base block py-2 pl-3 pr-4 bg-blue-500 rounded md:bg-transparent md:text-blue-400 md:p-0 text-white"
           aria-current="page">
           {title}
         </a>
       ) : (
         <a
           href={href}
-          className="block py-2 pl-3 pr-4 rounded md:p-0 text-zinc-400 hover:bg-zinc-700 hover:text-white md:hover:bg-transparent border-zinc-700">
+          className="font-bold text-base block py-2 pl-3 pr-4 rounded md:p-0 text-zinc-400 hover:bg-zinc-700 hover:text-white md:hover:bg-transparent border-zinc-700">
           {title}
         </a>
       )}
