@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Bars from "./Bars";
-import { Bars } from "@heroicons/react";
 import Tabs from "./Tabs";
+import MetamaskLogo from "../../images/metamask.png";
 
 interface IHeaderProps {
   companyName: string;
@@ -19,11 +19,11 @@ const Header = ({ companyName }: IHeaderProps) => {
   return (
     <nav className="px-2 sm:px-4 py-2.5 bg-zinc-900 fixed w-full z-20 top-0 left-0 border-b border-zinc-600">
       <div className="container flex flex-wrap items-center justify-between mx-auto">
-        <a href="https://flowbite.com/" className="flex items-center">
+        <a href="#" className="flex items-center">
           <span className="self-center text-xl font-semibold whitespace-nowrap text-white">{companyName}</span>
         </a>
         <div className="flex md:order-2">
-          <button className="max-md:hidden text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">
+          <button className="bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 max-md:hidden text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 flex">
             Connect
           </button>
           <button

@@ -1,10 +1,8 @@
 import React from "react";
-import { BlurredBgDown, BlurredBgUp } from "../components/Home/BlurredBg";
 
 const Home = () => {
   return (
     <>
-      <BlurredBgUp />
       <main className="h-screen overflow-hidden">
         <div className="relative px-6 lg:px-8">
           <div className="mx-auto max-w-3xl pt-20 pb-32 sm:pt-48 sm:pb-40">
@@ -47,7 +45,6 @@ const Home = () => {
                   </a>
                 </div>
               </div>
-              <BlurredBgDown />
             </div>
           </div>
         </div>
