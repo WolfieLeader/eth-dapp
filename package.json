@@ -33,7 +33,6 @@
   },
   "devDependencies": {
     "@headlessui/react": "^1.7.4",
-    "@heroicons/react": "^2.0.13",
     "@metamask/detect-provider": "^2.0.0",
     "@metamask/providers": "^10.2.1",
     "@types/react": "^18.0.24",
