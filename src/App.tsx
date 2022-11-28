@@ -10,7 +10,7 @@ const App = () => {
   return (
     <>
       <Header name="Dapp" />
-      <div className="container mx-auto px-2 sm:px-4 py-20">
+      <div className="container mx-auto py-20 px-4 md:px-12">
         <Suspense fallback={<Loading />}>
           <Routes>
             <Route path="/" element={<Home />} />

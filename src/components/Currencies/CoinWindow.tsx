@@ -7,8 +7,9 @@ interface ICoinDetailsProps {
   closeCryptoInfo: () => void;
 }
 const CoinDetails = ({ currency, closeCryptoInfo }: ICoinDetailsProps) => {
-  const { response } = useAxios(`coins/${currency}`);
-  //?localization=false&tickers=false&market_data=false&community_data=false&sparkline=false
+  const { response } = useAxios(
+    `coins/${currency}?localization=false&tickers=false&sparkline=false&community_data=false&developer_data=false`
+  );
 
   React.useEffect(() => {
     console.log(response);
@@ -16,10 +17,10 @@ const CoinDetails = ({ currency, closeCryptoInfo }: ICoinDetailsProps) => {
 
   return (
     <div
-      className="absolute inset-0 z-10 bg-black bg-opacity-70 h-full w-full flex justify-center items-center"
+      className="fixed inset-0 z-30 bg-zinc-900 bg-opacity-70 h-full w-full flex justify-center items-center"
       onClick={() => closeCryptoInfo()}>
-      <div className="bg-white rounded-lg py-32 px-52">
-        {response && <h1 className="text-3xl text-black">{(response as ICoinMarketsResponse).symbol}</h1>}
+      <div className="bg-zinc-900 border-2 border-zinc-600 rounded-lg py-32 px-52">
+        {response && <h1 className="text-3xl text-white">{(response as ICoinMarketsResponse).symbol}</h1>}
       </div>
     </div>
   );
