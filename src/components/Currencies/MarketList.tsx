@@ -1,13 +1,13 @@
 import React from "react";
 import useAxios from "../../hooks/useAxios";
 import Coin from "./Coin";
-import { ICoinMarketsResponse } from "../../interfaces/coingecko";
+import { IMarketListResponse } from "../../interfaces/coingecko";
 
-interface ICoinListProps {
+interface IMarketListProps {
   popCryptoInfo: (coinName: string) => void;
 }
 
-const CoinList = ({ popCryptoInfo }: ICoinListProps) => {
+const MarketList = ({ popCryptoInfo }: IMarketListProps) => {
   const { response } = useAxios(
     "coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false"
   );
@@ -18,7 +18,7 @@ const CoinList = ({ popCryptoInfo }: ICoinListProps) => {
 
   return (
     <div className="container w-full overflow-hidden">
-      <h1 className="text-blue-300 text-2xl font-bold tracking-tight sm:text-3xl mt-6">
+      <h1 className="text-indigo-400 text-2xl font-bold tracking-tight sm:text-3xl mt-6">
         Cryptocurrency Prices By Market Cap:
       </h1>
       <section className="container mt-4 bg-zinc-900 w-full border-2 border-zinc-600 rounded-md text-center">
@@ -31,7 +31,7 @@ const CoinList = ({ popCryptoInfo }: ICoinListProps) => {
           <div>24h %</div>
         </div>
         {response &&
-          (response as ICoinMarketsResponse[]).map((coin) => (
+          (response as IMarketListResponse[]).map((coin) => (
             <Coin key={coin.id} coin={coin} popCryptoInfo={popCryptoInfo} />
           ))}
       </section>
@@ -39,4 +39,4 @@ const CoinList = ({ popCryptoInfo }: ICoinListProps) => {
   );
 };
 
-export default CoinList;
+export default MarketList;

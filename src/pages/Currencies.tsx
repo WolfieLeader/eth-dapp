@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
-import CoinWindow from "../components/Currencies/CoinWindow";
-import CoinList from "../components/Currencies/CoinList";
+import PopUp from "../components/Currencies/PopUp";
+import MarketList from "../components/Currencies/MarketList";
 
 const Currencies = () => {
   const [searchParams, setSearchParams] = useSearchParams({ currency: "" });
@@ -20,8 +20,12 @@ const Currencies = () => {
 
   return (
     <div>
-      <CoinList popCryptoInfo={popCryptoInfo} />
-      {currency && <CoinWindow currency={currency} closeCryptoInfo={closeCryptoInfo} />}
+      <MarketList popCryptoInfo={popCryptoInfo} />
+      {currency && (
+        <div className="fixed inset-0 z-30 bg-zinc-900 bg-opacity-70 h-full w-full flex justify-center items-center">
+          <PopUp currency={currency} closeCryptoInfo={closeCryptoInfo} />
+        </div>
+      )}
     </div>
   );
 };

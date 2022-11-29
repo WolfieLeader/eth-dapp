@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import EthereumLogo from "../../images/ethereum.png";
-import Bars from "./Bars";
+import Bars from "./BarsIcon";
 import Tabs from "./Tabs";
 
-interface IHeaderProps {
+interface INavBarProps {
   name: string;
 }
 
-const Header = ({ name }: IHeaderProps) => {
+const NavBar = ({ name }: INavBarProps) => {
   const navigation = [
     { title: "Home", href: "/", current: true },
     { title: "Cryptocurrencies", href: "/currencies", current: false },
@@ -24,7 +24,7 @@ const Header = ({ name }: IHeaderProps) => {
           <span className="self-center text-xl font-semibold whitespace-nowrap text-white">{name}</span>
         </a>
         <div className="flex md:order-2">
-          <button className="bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 max-md:hidden text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 flex">
+          <button className="bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-800 max-md:hidden text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 flex">
             Connect
           </button>
           <button
@@ -44,4 +44,4 @@ const Header = ({ name }: IHeaderProps) => {
   );
 };
 
-export default Header;
+export default NavBar;

@@ -1,6 +1,6 @@
 import React from "react";
 
-const Bars = () => {
+const BarsIcon = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -14,4 +14,4 @@ const Bars = () => {
   );
 };
 
-export default Bars;
+export default BarsIcon;

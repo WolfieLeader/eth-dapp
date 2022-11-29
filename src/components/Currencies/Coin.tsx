@@ -1,9 +1,9 @@
 import React from "react";
 import { compactBigNumber } from "../../utils/format";
-import { ICoinMarketsResponse } from "../../interfaces/coingecko";
+import { IMarketListResponse } from "../../interfaces/coingecko";
 
 interface ICoinProps {
-  coin: ICoinMarketsResponse;
+  coin: IMarketListResponse;
   popCryptoInfo: (coinName: string) => void;
 }
 
