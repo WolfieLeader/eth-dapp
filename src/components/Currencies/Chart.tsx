@@ -44,7 +44,7 @@ export const Chart = ({ currency, symbol }: IChartProps) => {
     ],
   };
   return (
-    <div>
+    <div className="aspect-[1/2]">
       <Line options={{ responsive: true }} data={data} />
     </div>
   );

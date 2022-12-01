@@ -20,7 +20,7 @@ const PopUp = ({ id, closeCryptoInfo, marketListResponse }: IPopUpProps) => {
   const containerRef = useClosePopUp(closeCryptoInfo);
 
   return (
-    <div className="bg-zinc-900 border-2 border-zinc-600 z-40 rounded-lg w-2/3 h-3/4 p-1" ref={containerRef}>
+    <div className="bg-zinc-900 border-2 border-zinc-600 z-40 rounded-lg w-[60%] h-[90%] p-1" ref={containerRef}>
       <div className="flex flex-col w-full h-full overflow-hidden">
         <Details coin={coin} />
         <CoinChart currency={id} symbol={coin.symbol.toUpperCase()} />

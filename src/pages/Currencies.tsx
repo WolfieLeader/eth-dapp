@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { useSearchParams } from "react-router-dom";
 import PopUp from "../components/Currencies/PopUp";
 import MarketList from "../components/Currencies/MarketList";
@@ -12,10 +12,6 @@ const Currencies = () => {
   const [searchParams, setSearchParams] = useSearchParams({ currency: "" });
   const id = searchParams.get("currency");
 
-  const closeCryptoInfo = useCallback(() => {
-    setSearchParams({});
-  }, [setSearchParams]);
-
   return (
     <div>
       <div className="container w-full overflow-hidden">
@@ -26,7 +22,11 @@ const Currencies = () => {
       </div>
       {response && id && (
         <div className="fixed inset-0 z-30 bg-zinc-900 bg-opacity-70 h-full w-full flex justify-center items-center">
-          <PopUp id={id} closeCryptoInfo={closeCryptoInfo} marketListResponse={response as IMarketListResponse[]} />
+          <PopUp
+            id={id}
+            closeCryptoInfo={() => setSearchParams({})}
+            marketListResponse={response as IMarketListResponse[]}
+          />
         </div>
       )}
     </div>
