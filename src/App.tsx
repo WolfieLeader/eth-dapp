@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
 import Loading from "./pages/Loading";
 
@@ -15,6 +15,8 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/currencies" element={<Currencies />} />
+            <Route path="blockchain" element={<h1>Coming Soon</h1>} />
+            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </Suspense>
       </div>

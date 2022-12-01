@@ -19,9 +19,10 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 
 interface IChartProps {
   currency: string;
+  symbol: string;
 }
 
-export const Chart = ({ currency }: IChartProps) => {
+export const Chart = ({ currency, symbol }: IChartProps) => {
   const { response } = useAxios(`coins/${currency}/market_chart?vs_currency=usd&days=7`);
   if (!response) {
     return <div>Loading...</div>;
@@ -35,14 +36,18 @@ export const Chart = ({ currency }: IChartProps) => {
     datasets: [
       {
         fill: true,
-        label: "",
-        data: coinChartData.map((val) => val.y),
-        borderColor: "rgb(99, 102, 241",
+        label: symbol,
+        data: coinChartData.map((value) => value.y),
+        borderColor: "rgb(99, 102, 241)",
         backgroundColor: "rgba(99, 102, 241, 0.2)",
       },
     ],
   };
-  return <Line options={{ responsive: true }} data={data} />;
+  return (
+    <div>
+      <Line options={{ responsive: true }} data={data} />
+    </div>
+  );
 };
 
 export default Chart;

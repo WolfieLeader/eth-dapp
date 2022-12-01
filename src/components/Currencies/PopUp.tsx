@@ -1,17 +1,37 @@
 import React, { useEffect, useRef } from "react";
-import useAxios from "../../hooks/useAxios";
 import CoinChart from "./Chart";
-import { ICoinResponse } from "../../interfaces/coingecko";
+import { IMarketListResponse } from "../../interfaces/coingecko";
+import { useNavigate } from "react-router-dom";
+import Details from "./Details";
 interface IPopUpProps {
-  currency: string;
+  id: string;
   closeCryptoInfo: () => void;
+  marketListResponse: IMarketListResponse[];
 }
-const PopUp = ({ currency, closeCryptoInfo }: IPopUpProps) => {
-  const { response } = useAxios(
-    `coins/${currency}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`
-  );
+const PopUp = ({ id, closeCryptoInfo, marketListResponse }: IPopUpProps) => {
+  const navigate = useNavigate();
+  const coin = marketListResponse.find((coin) => coin.id === id);
 
+  if (!coin) {
+    navigate("/currencies", { replace: true });
+    return null;
+  }
+
+  const containerRef = useClosePopUp(closeCryptoInfo);
+
+  return (
+    <div className="bg-zinc-900 border-2 border-zinc-600 z-40 rounded-lg w-2/3 h-3/4 p-1" ref={containerRef}>
+      <div className="flex flex-col w-full h-full overflow-hidden">
+        <Details coin={coin} />
+        <CoinChart currency={id} symbol={coin.symbol.toUpperCase()} />
+      </div>
+    </div>
+  );
+};
+
+const useClosePopUp = (closeCryptoInfo: () => void) => {
   const containerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
@@ -31,16 +51,7 @@ const PopUp = ({ currency, closeCryptoInfo }: IPopUpProps) => {
     };
   }, [closeCryptoInfo]);
 
-  return (
-    <div className="bg-zinc-900 border-2 border-zinc-600 z-40 rounded-lg w-2/3 h-3/4" ref={containerRef}>
-      {response && (
-        <div className="flex flex-col h-full">
-          <div className="flex justify-between items-center p-4">{(response as ICoinResponse).market_data.ath.usd}</div>
-          <CoinChart currency={currency} />
-        </div>
-      )}
-    </div>
-  );
+  return containerRef;
 };
 
 export default PopUp;

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import EthereumLogo from "../../images/ethereum.png";
 import Bars from "./BarsIcon";
 import Tabs from "./Tabs";
@@ -9,9 +10,9 @@ interface INavBarProps {
 
 const NavBar = ({ name }: INavBarProps) => {
   const navigation = [
-    { title: "Home", href: "/", current: true },
-    { title: "Cryptocurrencies", href: "/currencies", current: false },
-    { title: "Blockchain Demo", href: "#", current: false },
+    { title: "Home", href: "/" },
+    { title: "Cryptocurrencies", href: "/currencies" },
+    { title: "Blockchain Demo", href: "/blockchain" },
   ];
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,10 +20,10 @@ const NavBar = ({ name }: INavBarProps) => {
   return (
     <nav className="px-2 sm:px-4 py-2.5 bg-zinc-900 fixed w-full z-20 top-0 left-0 border-b border-zinc-600">
       <div className="container flex flex-wrap items-center justify-between mx-auto">
-        <a href="#" className="flex items-center">
+        <NavLink to={"/"} className="flex items-center">
           <img src={EthereumLogo} alt="Ethereum Logo" className="h-10 pr-2" />
           <span className="self-center text-xl font-semibold whitespace-nowrap text-white">{name}</span>
-        </a>
+        </NavLink>
         <div className="flex md:order-2">
           <button className="bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-800 max-md:hidden text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 flex">
             Connect

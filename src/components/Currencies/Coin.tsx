@@ -1,13 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { compactBigNumber } from "../../utils/format";
 import { IMarketListResponse } from "../../interfaces/coingecko";
 
 interface ICoinProps {
   coin: IMarketListResponse;
-  popCryptoInfo: (coinName: string) => void;
 }
 
-const Coin = ({ coin, popCryptoInfo }: ICoinProps) => {
+const Coin = ({ coin }: ICoinProps) => {
   const {
     id,
     image,
@@ -20,9 +20,9 @@ const Coin = ({ coin, popCryptoInfo }: ICoinProps) => {
     price_change_percentage_24h,
   } = coin;
   return (
-    <div
-      className="h-16 items-center grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 border-b border-zinc-600 cursor-pointer bg-zinc-900 hover:bg-zinc-800"
-      onClick={() => popCryptoInfo(id)}>
+    <Link
+      to={`/currencies/?currency=${id}`}
+      className="h-16 items-center grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 border-b border-zinc-600 cursor-pointer bg-zinc-900 hover:bg-zinc-800">
       <div className="flex items-center justify-start pl-3 gap-1 text-left">
         <img className="w-6" src={image} alt={name} />
         <span className="leading-none">
@@ -46,7 +46,7 @@ const Coin = ({ coin, popCryptoInfo }: ICoinProps) => {
           {price_change_percentage_24h.toFixed(2)}%
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 export default Coin;
