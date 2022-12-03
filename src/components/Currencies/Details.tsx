@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSocket } from "../../hooks/useSocket";
+import { IMiniTicker } from "../../interfaces/binance";
 import { IFormattedData } from "../../interfaces/coingecko";
+import { formatNumber } from "../../utils/format";
+import { NotWatching, Watching } from "./Watching";
 
 interface IDetailsProps {
   coin: IFormattedData;
 }
 
 const Details = ({ coin }: IDetailsProps) => {
+  const { price, high, low, isWatching } = useLatestCryptoData(coin);
+
   return (
     <div className="flex flex-col font-semibold">
       <div className="flex items-center justify-between">
@@ -22,24 +28,15 @@ const Details = ({ coin }: IDetailsProps) => {
         </div>
       </div>
       <div className="flex flex-col px-4 pt-2">
-        <div className="flex flex-row items-center justify-start gap-2">
+        <div className="flex flex-row items-center justify-between gap-2">
           <div className="flex flex-row gap-1 text-xl">
+            {isWatching ? <Watching /> : <NotWatching />}
             <span>Current Price:</span>
-            <span className="text-indigo-300">${coin.current_price}</span>
-            <small
-              className={`font-thin ${
-                coin.price_change_percentage_24h > 0
-                  ? "text-green-500"
-                  : coin.price_change_percentage_24h < 0
-                  ? "text-red-500"
-                  : "text-zinc-500"
-              }`}>
-              ({coin.price_change_percentage_24h}%)
-            </small>
+            <span className="text-indigo-300">${price}</span>
           </div>
           <div className="flex flex-col items-center gap-0">
-            <div className="text-green-400 text-opacity-60 text-sm font-thin">High: ${coin.high_24h}</div>
-            <div className="text-red-400 text-opacity-60 text-sm font-thin">Low: ${coin.low_24h}</div>
+            <div className="text-green-400 text-opacity-60 text-sm font-thin">High: ${high}</div>
+            <div className="text-red-400 text-opacity-60 text-sm font-thin">Low: ${low}</div>
           </div>
         </div>
         <div className="grid grid-cols-3 w-full text-center border rounded border-zinc-600 mt-1">
@@ -55,8 +52,28 @@ const Details = ({ coin }: IDetailsProps) => {
   );
 };
 
-const useLatestCryptoData = () => {
-  return "";
+const useLatestCryptoData = (coin: IFormattedData) => {
+  const symbol = coin.symbol.toLowerCase();
+  const { lastMessage } = useSocket(`wss://stream.binance.com:9443/ws/${symbol}usdt@miniTicker`);
+
+  const formatter = (num: number) => formatNumber(num, false, 6);
+
+  const [price, setPrice] = React.useState(coin.current_price);
+  const [high, setHigh] = React.useState(coin.high_24h);
+  const [low, setLow] = React.useState(coin.low_24h);
+  const [isWatching, setIsWatching] = React.useState(false);
+
+  useEffect(() => {
+    if (lastMessage) {
+      setIsWatching(true);
+      const response = lastMessage as IMiniTicker;
+      setPrice(formatter(Number(response.c)));
+      setHigh(formatter(Number(response.h)));
+      setLow(formatter(Number(response.l)));
+    }
+  }, [lastMessage]);
+
+  return { price, high, low, isWatching };
 };
 
 export default Details;
