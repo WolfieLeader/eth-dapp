@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import CoinChart from "./Chart";
-import { IMarketListResponse } from "../../interfaces/coingecko";
+import { IFormattedData } from "../../interfaces/coingecko";
 import { useNavigate } from "react-router-dom";
 import Details from "./Details";
 interface IPopUpProps {
   id: string;
   closeCryptoInfo: () => void;
-  marketListResponse: IMarketListResponse[];
+  marketListResponse: IFormattedData[];
 }
 const PopUp = ({ id, closeCryptoInfo, marketListResponse }: IPopUpProps) => {
   const navigate = useNavigate();
@@ -20,8 +20,8 @@ const PopUp = ({ id, closeCryptoInfo, marketListResponse }: IPopUpProps) => {
   const containerRef = useClosePopUp(closeCryptoInfo);
 
   return (
-    <div className="bg-zinc-900 border-2 border-zinc-600 z-40 rounded-lg w-[60%] h-[90%] p-1" ref={containerRef}>
-      <div className="flex flex-col w-full h-full overflow-hidden">
+    <div className="bg-zinc-900 border-2 border-zinc-600 z-40 rounded-lg h-[90%] aspect-video p-1" ref={containerRef}>
+      <div className="flex flex-col w-full h-full overflow-hidden py-2 px-4">
         <Details coin={coin} />
         <CoinChart currency={id} symbol={coin.symbol.toUpperCase()} />
       </div>

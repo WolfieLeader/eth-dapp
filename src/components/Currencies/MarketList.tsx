@@ -1,9 +1,9 @@
 import React from "react";
 import Coin from "./Coin";
-import { IMarketListResponse } from "../../interfaces/coingecko";
+import { IFormattedData } from "../../interfaces/coingecko";
 
 interface IMarketListProps {
-  marketListResponse: IMarketListResponse[];
+  marketListResponse: IFormattedData[];
 }
 
 const MarketList = ({ marketListResponse }: IMarketListProps) => {
@@ -17,7 +17,7 @@ const MarketList = ({ marketListResponse }: IMarketListProps) => {
         <div className="hidden md:block">Total Supply</div>
         <div>24h %</div>
       </div>
-      {(marketListResponse as IMarketListResponse[]).map((coin) => (
+      {(marketListResponse as IFormattedData[]).map((coin) => (
         <Coin key={coin.id} coin={coin} />
       ))}
     </section>

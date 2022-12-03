@@ -5,6 +5,7 @@ import Loading from "./pages/Loading";
 
 const Home = lazy(() => import("./pages/Home"));
 const Currencies = lazy(() => import("./pages/Currencies"));
+const Blockchain = lazy(() => import("./pages/Blockchain"));
 
 const App = () => {
   return (
@@ -15,7 +16,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/currencies" element={<Currencies />} />
-            <Route path="blockchain" element={<h1>Coming Soon</h1>} />
+            <Route path="blockchain" element={<Blockchain />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </Suspense>

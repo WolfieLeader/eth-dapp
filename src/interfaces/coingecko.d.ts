@@ -36,3 +36,18 @@ export interface ICoinHistoryResponse {
   market_caps: number[][];
   total_volumes: number[][];
 }
+
+export interface IFormattedData {
+  id: string;
+  symbol: string;
+  name: string;
+  image: string;
+  current_price: string;
+  price_change_percentage_24h: number;
+  market_cap: string;
+  total_volume: string;
+  total_supply: string;
+  high_24h: string;
+  low_24h: string;
+  ath: string;
+}
