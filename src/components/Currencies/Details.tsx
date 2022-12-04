@@ -10,43 +10,68 @@ interface IDetailsProps {
 }
 
 const Details = ({ coin }: IDetailsProps) => {
+  return (
+    <div className="flex flex-col font-semibold">
+      <Title coin={coin} />
+      <div className="flex flex-col p-1 md:py-2 md:px-4">
+        <ReactiveBody coin={coin} />
+        <StaticBody coin={coin} />
+      </div>
+    </div>
+  );
+};
+
+const Title = ({ coin }: IDetailsProps) => {
+  return (
+    <div className="flex items-center justify-between">
+      <div className="flex items-center gap-1 text-xl sm:text-2xl">
+        <img className="w-[1.75em]" src={coin.image} alt={coin.name} />
+        <span className="leading-none">{coin.name}</span>
+        <span className="text-zinc-400 text-[0.55em]"> ({coin.symbol})</span>
+      </div>
+      <div className="flex flex-col justify-center items-center text-sm xs:text-md sm:text-lg">
+        <div className="block sm:hidden">ATH:</div>
+        <div className="hidden sm:block">All Time High:</div>
+        <div className="text-indigo-300">${coin.ath}</div>
+      </div>
+    </div>
+  );
+};
+
+const ReactiveBody = ({ coin }: IDetailsProps) => {
   const { price, high, low, isWatching } = useLatestCryptoData(coin);
 
   return (
-    <div className="flex flex-col font-semibold">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-1">
-          <img className="w-16" src={coin.image} alt={coin.name} />
-          <span className="leading-none text-2xl font-bold">
-            {coin.name}
-            <small className="text-zinc-400"> ({coin.symbol})</small>
-          </span>
+    <div className="flex flex-col xsm:flex-row">
+      <div className="w-full flex flex-col xs:flex-row xs:gap-1 xs:justify-between xsm:justify-start xsm:items-center text-base xs:text-xl sm:text-2xl">
+        <div className="flex flex-row gap-1 items-center">
+          <span>{isWatching ? <Watching /> : <NotWatching />}</span>
+          <span className="whitespace-nowrap">Current Price:</span>
         </div>
-        <div className="flex flex-col justify-center items-center">
-          <div>All Time High:</div>
-          <div className="text-indigo-300 text-lg">${coin.ath}</div>
-        </div>
+        <div className="text-indigo-300 text-center text-lg sm:text-2xl">${price}</div>
       </div>
-      <div className="flex flex-col px-4 pt-2">
-        <div className="flex flex-row items-center justify-between gap-2">
-          <div className="flex flex-row gap-1 text-xl">
-            {isWatching ? <Watching /> : <NotWatching />}
-            <span>Current Price:</span>
-            <span className="text-indigo-300">${price}</span>
-          </div>
-          <div className="flex flex-col items-center gap-0">
-            <div className="text-green-400 text-opacity-60 text-sm font-thin">High: ${high}</div>
-            <div className="text-red-400 text-opacity-60 text-sm font-thin">Low: ${low}</div>
-          </div>
-        </div>
-        <div className="grid grid-cols-3 w-full text-center border rounded border-zinc-600 mt-1">
-          <div>Market Cap:</div>
-          <div>Volume:</div>
-          <div>Total Supply:</div>
-          <div className="text-indigo-300">${coin.market_cap}</div>
-          <div className="text-indigo-300">${coin.total_volume}</div>
-          <div className="text-indigo-300">{coin.total_supply}</div>
-        </div>
+      <div className="flex flex-row items-center justify-between xsm:flex-col text-sm sm:text-base">
+        <div className="text-green-400 text-opacity-60 font-thin whitespace-nowrap">High: ${high}</div>
+        <div className="text-red-400 text-opacity-60 font-thin whitespace-nowrap">Low: ${low}</div>
+      </div>
+    </div>
+  );
+};
+
+const StaticBody = ({ coin }: IDetailsProps) => {
+  return (
+    <div className="grid grid-cols-1 xs:grid-cols-3 w-full text-center mt-1 gap-1 xs:border rounded border-zinc-600 text-base sm:text-xl">
+      <div className="border rounded border-zinc-600 xs:border-none">
+        <div>Market Cap:</div>
+        <div className="text-indigo-300">${coin.market_cap}</div>
+      </div>
+      <div className="border rounded border-zinc-600 xs:border-none">
+        <div>Volume:</div>
+        <div className="text-indigo-300">${coin.total_volume}</div>
+      </div>
+      <div className="border rounded border-zinc-600 xs:border-none">
+        <div>Total Supply:</div>
+        <div className="text-indigo-300">{coin.total_supply}</div>
       </div>
     </div>
   );

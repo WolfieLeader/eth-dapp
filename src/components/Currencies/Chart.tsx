@@ -44,7 +44,7 @@ export const Chart = ({ currency, symbol }: IChartProps) => {
     ],
   };
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center overflow-hidden">
+    <div className="hidden w-full h-full xs:flex flex-col items-center justify-center overflow-hidden">
       <Line options={{ responsive: true }} data={data} />
     </div>
   );

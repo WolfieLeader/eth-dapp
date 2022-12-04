@@ -8,7 +8,7 @@ export const Watching = () => {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className="w-6 h-6 my-auto rounded bg-zinc-300 bg-opacity-10">
+      className="w-[1.2em] h-[1.2em] my-auto rounded bg-zinc-300 bg-opacity-10">
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -27,7 +27,7 @@ export const NotWatching = () => {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className="w-6 h-6 my-auto rounded bg-zinc-300 bg-opacity-10">
+      className="w-[1.2em] h-[1.2em] my-auto rounded bg-zinc-300 bg-opacity-10">
       <path
         strokeLinecap="round"
         strokeLinejoin="round"

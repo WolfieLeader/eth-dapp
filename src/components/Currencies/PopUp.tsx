@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import CoinChart from "./Chart";
 import { IFormattedData } from "../../interfaces/coingecko";
 import { useNavigate } from "react-router-dom";
 import Details from "./Details";
+import { useClosePopUp } from "../../hooks/useClosePopUp";
 interface IPopUpProps {
   id: string;
   closeCryptoInfo: () => void;
@@ -20,38 +21,15 @@ const PopUp = ({ id, closeCryptoInfo, marketListResponse }: IPopUpProps) => {
   const containerRef = useClosePopUp(closeCryptoInfo);
 
   return (
-    <div className="bg-zinc-900 border-2 border-zinc-600 z-40 rounded-lg h-[90%] aspect-video p-1" ref={containerRef}>
-      <div className="flex flex-col w-full h-full overflow-hidden py-2 px-4">
+    <div
+      className="bg-zinc-900 border-2 border-zinc-600 z-40 rounded-lg w-[90%] sm:w-[85%] md:w-[80%] lg:w-[70%] xl:w-[55%] h-fit max-h-[95%] p-1"
+      ref={containerRef}>
+      <div className="flex flex-col w-full h-full overflow-hidden p-1 sm:py-2 sm:px-4">
         <Details coin={coin} />
         <CoinChart currency={id} symbol={coin.symbol.toUpperCase()} />
       </div>
     </div>
   );
-};
-
-const useClosePopUp = (closeCryptoInfo: () => void) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
-        closeCryptoInfo();
-      }
-    };
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        closeCryptoInfo();
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    document.addEventListener("keydown", handleEscape);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("keydown", handleEscape);
-    };
-  }, [closeCryptoInfo]);
-
-  return containerRef;
 };
 
 export default PopUp;

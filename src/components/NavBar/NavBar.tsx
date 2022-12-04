@@ -12,7 +12,7 @@ const NavBar = ({ name }: INavBarProps) => {
   const navigation = [
     { title: "Home", href: "/" },
     { title: "Cryptocurrencies", href: "/currencies" },
-    { title: "Blockchain Demo", href: "/blockchain" },
+    { title: "Smart Contracts", href: "/smartcontracts" },
   ];
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
