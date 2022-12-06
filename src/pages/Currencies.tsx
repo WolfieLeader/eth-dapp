@@ -5,6 +5,7 @@ import MarketList from "../components/Currencies/MarketList";
 import useAxios from "../hooks/useAxios";
 import { IMarketListResponse, IFormattedData } from "../interfaces/coingecko";
 import { formatNumber } from "../utils/format";
+import Skeleton from "../components/Currencies/Skeleton";
 
 const Currencies = () => {
   const { formattedData } = useFormattedData();
@@ -12,19 +13,19 @@ const Currencies = () => {
   const id = searchParams.get("currency");
 
   return (
-    <div>
+    <>
       <div className="container w-full overflow-hidden">
         <h1 className="text-indigo-400 text-2xl font-bold tracking-tight sm:text-3xl mt-6">
           Cryptocurrency Prices By Market Cap:
         </h1>
-        {formattedData && <MarketList marketListResponse={formattedData} />}
+        {formattedData ? <MarketList marketListResponse={formattedData} /> : <Skeleton />}
       </div>
       {formattedData && id && (
         <div className="fixed inset-0 z-30 bg-zinc-900 bg-opacity-70 h-full w-full flex justify-center items-center">
           <PopUp id={id} closeCryptoInfo={() => setSearchParams({})} marketListResponse={formattedData} />
         </div>
       )}
-    </div>
+    </>
   );
 };
 

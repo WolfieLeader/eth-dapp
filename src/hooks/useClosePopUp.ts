@@ -1,17 +1,17 @@
 import { useEffect, useRef } from "react";
 
-export const useClosePopUp = (closeCryptoInfo: () => void) => {
+export const useClosePopUp = (cb: () => void) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
-        closeCryptoInfo();
+        cb();
       }
     };
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        closeCryptoInfo();
+        cb();
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -20,7 +20,7 @@ export const useClosePopUp = (closeCryptoInfo: () => void) => {
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("keydown", handleEscape);
     };
-  }, [closeCryptoInfo]);
+  }, [cb]);
 
   return containerRef;
 };

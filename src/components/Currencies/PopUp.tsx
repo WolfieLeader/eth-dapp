@@ -22,7 +22,7 @@ const PopUp = ({ id, closeCryptoInfo, marketListResponse }: IPopUpProps) => {
 
   return (
     <div
-      className="bg-zinc-900 border-2 border-zinc-600 z-40 rounded-lg w-[90%] sm:w-[85%] md:w-[80%] lg:w-[70%] xl:w-[55%] h-fit max-h-[95%] p-1"
+      className="bg-zinc-900 border-2 border-zinc-600 z-40 rounded-lg w-[90%] sm:w-[85%] md:w-[80%] lg:w-[70%] xl:w-[55%] lg:max-w-3xl h-fit max-h-[95%] p-1"
       ref={containerRef}>
       <div className="flex flex-col w-full h-full overflow-hidden p-1 sm:py-2 sm:px-4">
         <Details coin={coin} />
