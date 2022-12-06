@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useClosePopUp } from "../../hooks/useClosePopUp";
-import { useMetamaskDetector } from "../../hooks/useMetamaskDetector";
+import { useMetamask } from "../../hooks/useMetamask";
 import MetamaskLogo from "../../images/metamask.png";
 import { connectMetamask } from "../../utils/metamask";
 
@@ -10,7 +10,7 @@ interface IConnectWalletProps {
 
 const ConnectWallet = ({ setIsConnectWalletOpen }: IConnectWalletProps) => {
   const containerRef = useClosePopUp(() => setIsConnectWalletOpen(false));
-  const isMetamaskInstalled = useMetamaskDetector();
+  const { isInstalled } = useMetamask();
 
   return (
     <div className="fixed inset-0 z-30 bg-zinc-900 bg-opacity-70 h-full w-full flex justify-center items-center">
@@ -19,10 +19,10 @@ const ConnectWallet = ({ setIsConnectWalletOpen }: IConnectWalletProps) => {
           Connect Wallet Via
         </div>
         <button
-          disabled={isMetamaskInstalled}
+          disabled={!isInstalled}
           onClick={connectMetamask}
           className={`bg-indigo-600 w-full rounded text-2xl flex flex-row justify-center items-center py-1 font-bold
-          ${isMetamaskInstalled ? "cursor-pointer hover:bg-indigo-700" : "cursor-not-allowed opacity-50"}`}>
+          ${isInstalled ? "cursor-pointer hover:bg-indigo-700" : "cursor-not-allowed opacity-50"}`}>
           <img src={MetamaskLogo} alt="Metamask" className="w-[1.5em] h-[1.5em] mr-2" />
           <span>Metamask</span>
         </button>
