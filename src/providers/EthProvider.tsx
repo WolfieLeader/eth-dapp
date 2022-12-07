@@ -18,13 +18,14 @@ export const EthProvider = ({ children }: IEthProvider) => {
   useEffect(() => {
     if (isInstalled) {
       const handleAccountsChanged = (accounts: unknown) => {
-        if (Array.isArray(accounts) && accounts.length > 0 && typeof accounts[0] === "string") {
-          setAddress(accounts[0]);
-          setIsConnected(true);
-        } else {
-          setAddress("");
-          setIsConnected(false);
-        }
+        const isValid =
+          Array.isArray(accounts) &&
+          accounts.length > 0 &&
+          typeof accounts[0] === "string" &&
+          accounts[0].length === 42;
+
+        setAddress(isValid ? accounts[0] : "");
+        setIsConnected(isValid);
       };
 
       const detectWallets = async () => {
@@ -39,9 +40,7 @@ export const EthProvider = ({ children }: IEthProvider) => {
       const detectChainId = async () => {
         try {
           const chainId = await ethereum.request({ method: "eth_chainId" });
-          if (typeof chainId === "string") {
-            setChainId(parseInt(chainId));
-          }
+          if (typeof chainId === "string") setChainId(parseInt(chainId));
         } catch (error) {
           console.error(error);
         }

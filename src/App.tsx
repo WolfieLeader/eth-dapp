@@ -11,7 +11,7 @@ const App = () => {
   return (
     <>
       <NavBar name="Dapp" />
-      <div className="container mx-auto py-20 px-4 md:px-12">
+      <div className="container mx-auto pt-20 px-4 md:px-12 h-screen">
         <Suspense fallback={<Loading />}>
           <Routes>
             <Route path="/" element={<Home />} />
