@@ -16,7 +16,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/currencies" element={<Currencies />} />
-            <Route path="/smartcontracts" element={<SmartContracts />} />
+            <Route path="/smart-contracts" element={<SmartContracts />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </Suspense>

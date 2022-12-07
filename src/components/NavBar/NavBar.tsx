@@ -14,13 +14,13 @@ interface INavBarProps {
 const navigation = [
   { title: "Home", href: "/" },
   { title: "Cryptocurrencies", href: "/currencies" },
-  { title: "Smart Contracts", href: "/smartcontracts" },
+  { title: "Smart Contracts", href: "/smart-contracts" },
 ];
 
 const NavBar = ({ name }: INavBarProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isConnectWalletOpen, setIsConnectWalletOpen] = useState(false);
-  const { isConnected, address } = useMetamask();
+  const { isConnected, address, chainId } = useMetamask();
   const { width } = useWindowSize();
 
   useEffect(() => {
@@ -38,11 +38,15 @@ const NavBar = ({ name }: INavBarProps) => {
     return "";
   }, [address]);
 
+  useEffect(() => {
+    console.log("chainId", chainId);
+  }, [chainId]);
+
   return (
     <>
       <nav className="px-2 sm:px-4 py-2.5 bg-zinc-900 fixed w-full z-20 top-0 left-0 border-b border-zinc-600">
         <div className="container flex flex-wrap items-center justify-between mx-auto">
-          <NavLink to={"/"} className="flex items-center">
+          <NavLink to="/" className="flex items-center">
             <img src={EthereumLogo} alt="Ethereum Logo" className="h-10 pr-2" />
             <span className="self-center text-xl font-semibold whitespace-nowrap text-white">{name}</span>
           </NavLink>
