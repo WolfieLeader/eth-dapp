@@ -14,13 +14,13 @@ interface INavBarProps {
 const navigation = [
   { title: "Home", href: "/" },
   { title: "Cryptocurrencies", href: "/currencies" },
-  { title: "Smart Contracts", href: "/smart-contracts" },
+  { title: "Github", href: "https://github.com/WolfieLeader" },
 ];
 
 const NavBar = ({ name }: INavBarProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isConnectWalletOpen, setIsConnectWalletOpen] = useState(false);
-  const { isConnected, address, chainId } = useMetamask();
+  const { isConnected, address } = useMetamask();
   const { width } = useWindowSize();
 
   useEffect(() => {
@@ -37,10 +37,6 @@ const NavBar = ({ name }: INavBarProps) => {
     }
     return "";
   }, [address]);
-
-  useEffect(() => {
-    console.log("chainId", chainId);
-  }, [chainId]);
 
   return (
     <>

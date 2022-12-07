@@ -16,15 +16,15 @@
     "react",
     "vite",
     "typescript",
-    "ethers",
+    "metamask",
     "web3",
     "crypto",
-    "real-time"
+    "real-time",
+    "dapp"
   ],
   "dependencies": {
     "@fontsource/roboto": "^4.5.8",
     "chart.js": "^4.0.1",
-    "ethers": "^5.7.2",
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.0.1",
@@ -32,7 +32,6 @@
     "react-router-dom": "^6.4.3"
   },
   "devDependencies": {
-    "@headlessui/react": "^1.7.4",
     "@metamask/detect-provider": "^2.0.0",
     "@metamask/providers": "^10.2.1",
     "@types/react": "^18.0.24",

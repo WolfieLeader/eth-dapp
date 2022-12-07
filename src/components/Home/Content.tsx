@@ -16,14 +16,16 @@ const Content = () => {
               &rarr;
             </span>
           </Link>
-          <Link
-            to="/smart-contracts"
+          <a
+            href="https://github.com/WolfieLeader/eth-dapp"
+            target="_blank"
+            rel="noreferrer"
             className="inline-block rounded-lg px-4 py-1.5 text-base font-semibold leading-7 text-gray-200 ring-1 ring-gray-200/10 hover:ring-gray-200/20">
-            Interact With Web3
+            Repository
             <span className="text-gray-400" aria-hidden="true">
               &rarr;
             </span>
-          </Link>
+          </a>
         </div>
       </div>
     </main>

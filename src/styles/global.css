@@ -1,5 +1,4 @@
 :root {
-  // font-family: "Roboto", sans-serif;
   font-family: -apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif;
   font-size: 16px;
   line-height: 24px;
@@ -32,4 +31,17 @@ a {
   color: inherit;
   text-decoration: inherit;
   cursor: pointer;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }

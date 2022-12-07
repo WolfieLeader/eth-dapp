@@ -7,6 +7,19 @@ interface ITabProps {
 }
 
 const Tab = ({ title, href }: ITabProps) => {
+  if (href.startsWith("http")) {
+    return (
+      <li>
+        <a
+          href={href}
+          target="_blank"
+          rel="noreferrer"
+          className="font-bold text-base block py-2 pl-3 pr-4 rounded md:p-0 text-zinc-400 hover:text-white hover:bg-zinc-700 md:hover:bg-transparent">
+          {title}
+        </a>
+      </li>
+    );
+  }
   return (
     <li>
       <NavLink
